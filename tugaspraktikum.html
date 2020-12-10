@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN</title>
+    <style>
+        body{
+            background-color: rgb(24, 1, 228);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 250px;
+            margin: 200px auto;
+        }
+
+        input, button {
+            margin: 10px 0px;
+            height: 30px;
+            border: 1px solid rgb(0, 0, 0);
+            padding: 0px 5px;
+        }
+
+        @keyframes fade {
+            0% {
+                opacity: 0;
+                transform: scale(1);
+            } 50% {
+                opacity: 1;
+                transform: scale(1.1);
+            } 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .modal.invalid {
+            color: #ff0000;
+            text-align: center;
+            font-size: 15px;
+            position: static;
+            background-color: #ffffff;
+        }
+        .modal.show {
+            animation: fade 2s forwards;
+            display: block;
+        }
+
+        .modal_content .modal_header {
+            padding: 30px 50px;
+        }      
+
+        .modal {
+            top: 0;
+            background-color: rgba(0, 0, 0, 0.672);
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            left: 0;
+        }
+
+        .modal_dialog {
+            position: relative;
+            width: auto;
+            max-width: fit-content;
+            margin: 60px auto;
+           
+        }
+
+        .modal_content {
+            height: 100px;
+            text-align: center;
+            background-color: rgb(87, 189, 100);
+            margin-top: 400px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body id="Bodyhtml">
+    <div class="modal success">
+        <div class="modal_dialog">
+            <div class="modal_content">
+                <div class="modal_header">
+                    BERHASIL LOGIN
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form id="formLogin" name="login">
+        <input type="text" name="username" placeholder="Username">
+        <input type="password" name="password" placeholder="Pasword">
+        <button type="submit" data-toggle="modal">LOGIN</button>
+        <div class="modal invalid">USERNAME DAN PASSWORD ANDA SALAH</div>
+    </form>
+    
+    <script>
+            let htmlBody = document.getElementById("htmlBody");
+            let button = document.querySelector('button[data-toggle="modal"]');
+            let modalSuccess =  document.querySelector('.success');
+            let modalInvalid =  document.querySelector('.invalid');
+            button.addEventListener('click', function() {
+                let username = document.forms["login"]["username"].value;
+                let password = document.forms["login"]["password"].value;
+
+                if (username == "pweb_C" && password == "123123") {
+                    modalSuccess.classList.add('show');
+                    modalInvalid.classList.remove('show');
+                    Bodyhtml.style.backgroundColor = "green";
+                } else {
+                    modalInvalid.classList.add('show');
+                    Bodyhtml.style.backgroundColor = "red";
+                }
+            });
+            modalSuccess.addEventListener('click', function() {
+                this.classList.remove('show');
+            });   
+            let formLogin = document.getElementById("formLogin")
+            formLogin.addEventListener("click", function(event){
+                event.preventDefault()
+            });
+    </script>
+</body>
+</html>
